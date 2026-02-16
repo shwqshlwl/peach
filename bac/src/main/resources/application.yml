@@ -1,0 +1,55 @@
+spring:
+  application:
+    name: peach-adoption
+  
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/peach_adoption?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
+    username: root
+    password: shwqshlwl1234
+  
+  # Redis配置（如果不需要Redis，保持注释状态）
+  # redis:
+  #   host: localhost
+  #   port: 6379
+  #   database: 0
+  #   timeout: 3000
+  
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/**/*.xml
+  type-aliases-package: com.peachtree.entity
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+# JWT配置
+jwt:
+  secret: peach-tree-adoption-secret-key-2024
+  expiration: 604800000  # 7天
+
+# 阿里云OSS配置（需要替换为实际配置）
+aliyun:
+  oss:
+    endpoint: your-endpoint
+    access-key-id: your-access-key-id
+    access-key-secret: your-access-key-secret
+    bucket-name: your-bucket-name
+
+# 微信支付配置（默认禁用，需要时设置enabled=true并配置相关参数）
+wechat:
+  pay:
+    enabled: false                         # 是否启用微信支付
+    app-id: your-app-id                    # 微信公众号/小程序AppID
+    mch-id: your-mch-id                    # 商户号
+    api-v3-key: your-api-v3-key            # APIv3密钥
+    private-key-path: classpath:wechat/apiclient_key.pem    # 商户私钥路径
+    merchant-serial-number: your-serial-number              # 商户证书序列号
+    notify-url: https://your-domain.com/api/payment/wechat/notify  # 支付回调地址
+
+server:
+  port: 8080
